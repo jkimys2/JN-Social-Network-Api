@@ -1,6 +1,7 @@
 // Import files
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
+const dayJs = require("dayjs");
 
 // Schema to create Thought model
 const thoughtSchema = new Schema(
@@ -14,6 +15,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (timestamp) => dayJs(timestamp).format("MM/DD/YYYY"),
     },
     username: {
       type: String,
@@ -24,6 +26,7 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }

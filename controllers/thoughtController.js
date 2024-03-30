@@ -37,7 +37,7 @@ module.exports = {
         { $addToSet: { thoughts: thought._id } },
         { runValidators: true, new: true }
       );
-      return res.status(200).json(thought, user);
+      return res.status(200).json({ thought, user });
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -81,7 +81,7 @@ module.exports = {
   // Post a new reaction
   async createReaction(req, res) {
     try {
-      const reaction = await User.findOneAndUpdate(
+      const reaction = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
@@ -98,7 +98,7 @@ module.exports = {
     try {
       const reaction = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { reactions: { _id: req.params.reactionId } } },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       );
       if (!reaction) {
