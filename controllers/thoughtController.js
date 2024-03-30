@@ -1,5 +1,5 @@
 // Import files
-const { Thought } = require("../models");
+const { User, Thought } = require("../models");
 
 // Export
 module.exports = {
@@ -22,6 +22,56 @@ module.exports = {
         return res.status(404).json({ message: "No thought with that ID" });
       }
       res.status(200).json(thought);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
+
+  // Post a new thought
+  async createThought(req, res) {
+    try {
+      const thought = await Thought.create(req.body);
+      const user = await User.findByIdAndUpdate(
+        req.body.userId,
+        { $addToSet: { thoughts: thought._id } },
+        { runValidators: true, new: true }
+      );
+      return res.status(200).json(thought, user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
+
+  // Update a thought
+  async updateThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      );
+      if (!thought) {
+        return res.status(404).json({ message: "No thought with this ID!" });
+      }
+      return res.status(200).json(thought);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  },
+
+  // Delete a thought
+  async deleteThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndDelete({
+        _id: req.params.thoughtId,
+      });
+      if (!thought) {
+        return res.status(404).json({ message: "No thought with this ID!" });
+      }
+      return res.status(200).json("Thought has been deleted!");
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
