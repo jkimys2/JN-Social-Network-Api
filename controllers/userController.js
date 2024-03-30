@@ -1,6 +1,5 @@
 // Import files
-const { ObjectId } = require("mongoose").Types;
-const { Thought, User } = require("../models");
+const { User, Thought } = require("../models");
 
 // Export
 module.exports = {
