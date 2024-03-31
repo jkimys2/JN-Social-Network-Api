@@ -26,7 +26,7 @@ WHEN I test API POST and DELETE routes in Insomnia
 THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
 ```
 
-The project was built completely from scratch, meaning there was no starter code provided for the challenge! Insomnia was used in order to seed data and test the routes. A walkthrough video was created to demonstrate how the application works.
+The project was built completely from scratch, meaning there was no starter code provided for the challenge! Insomnia was used in order to seed data and test the routes. A [walkthrough video](#links) was created to demonstrate how the application works.
 
 
 ## Installation
