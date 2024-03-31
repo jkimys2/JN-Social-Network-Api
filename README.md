@@ -41,7 +41,7 @@ In order to navigate through this Social Network API application, you will need 
 
 ## Usage
 
-ONce you have the file in VS Code, you will need to install the dependencies by running ```npm install``` in the integrated terminal.
+Once you have the file in VS Code, you will need to install the dependencies by running ```npm install``` in the integrated terminal.
 
 Once the dependencies are installed, type ```node index.js``` in the integrated terminal to start the server. You will know that the server is running when you see the message ```API server running on port 3001!```.
 
